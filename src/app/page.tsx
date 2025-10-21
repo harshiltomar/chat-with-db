@@ -13,8 +13,8 @@ export default function Chat() {
       <div className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <div className="w-4 h-4 bg-white rounded-sm"></div>
+            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+              <div className="w-4 h-4 bg-white rounded-full"></div>
             </div>
             <h1 className="text-xl font-semibold text-slate-900 dark:text-white">Chat with Database</h1>
           </div>
@@ -28,7 +28,7 @@ export default function Chat() {
           <div className="h-[calc(100vh-200px)] overflow-y-auto p-6 space-y-4">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
+                <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4">
                   <div className="w-8 h-8 bg-white rounded-full"></div>
                 </div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">Welcome to Chat with Database</h2>
@@ -41,10 +41,10 @@ export default function Chat() {
                 <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                     message.role === 'user' 
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' 
+                      ? 'bg-blue-500 text-white' 
                       : 'bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white'
                   }`}>
-                    <div className="flex items-center space-x-2 mb-2">
+                    {/* <div className="flex items-center space-x-2 mb-2">
                       <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${
                         message.role === 'user' 
                           ? 'bg-white/20 text-white' 
@@ -55,7 +55,7 @@ export default function Chat() {
                       <span className="text-sm font-medium opacity-80">
                         {message.role === 'user' ? 'You' : 'Assistant'}
                       </span>
-                    </div>
+                    </div> */}
                     <div className="space-y-2">
                       {message.parts.map((part, i) => {
                         switch (part.type) {
@@ -112,7 +112,7 @@ export default function Chat() {
                   onChange={e => setInput(e.currentTarget.value)}
                 />
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ export default function Chat() {
               <button
                 type="submit"
                 disabled={!input.trim()}
-                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="px-6 py-3 bg-blue-500 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 Send
               </button>

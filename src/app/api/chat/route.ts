@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai';
-import { streamText, UIMessage, convertToModelMessages, tool } from 'ai';
+import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
 import { z } from 'zod';
 
 export const maxDuration = 30;
@@ -22,6 +22,7 @@ export async function POST(req: Request) {
     model: openai('gpt-4o'),
     messages: convertToModelMessages(messages),
     system: SYSTEM_PROMPT,
+    stopWhen: stepCountIs(5),
     tools: {
       schema: tool({
         description: "Call this tool to get the database schema information",
