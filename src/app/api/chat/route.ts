@@ -1,4 +1,5 @@
 import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
 import { z } from 'zod';
 import { db } from '../../../../db/db';
@@ -72,7 +73,7 @@ export async function POST(req: Request) {
   `
 
   const result = streamText({
-    model: openai('gpt-4o'),
+    model: google('gemini-2.0-flash'),
     messages: convertToModelMessages(messages),
     system: SYSTEM_PROMPT,
     stopWhen: stepCountIs(5),
