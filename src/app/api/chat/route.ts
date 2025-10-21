@@ -1,6 +1,7 @@
 import { openai } from '@ai-sdk/openai';
 import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
 import { z } from 'zod';
+import { db } from '../../../../db/db';
 
 export const maxDuration = 30;
 
@@ -8,6 +9,8 @@ export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
   const SYSTEM_PROMPT = `You are an expert QE assistant that helps users to query their database using natural language.
+
+  The current date and time is ${new Date().toLocaleString('sv-SE')}.
   You have access to following tools:
   1. schema tool call this tool to get the database schema which will help you to write sql query.
   2. db tool call this tool to query the database.
@@ -55,6 +58,8 @@ export async function POST(req: Request) {
         }),
         execute: async ({ query }) => {
           console.log(query);
+          //Important: make sure you sanitise or validate the query before executing it on the database. ( Guardrails )
+          await db.run(query);
           return {
             result: 'Query executed successfully.',
           };

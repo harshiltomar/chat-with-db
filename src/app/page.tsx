@@ -28,7 +28,7 @@ export default function Chat() {
           <div className="h-[calc(100vh-200px)] overflow-y-auto p-6 space-y-4">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center">
-                <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4">
+                <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-4">
                   <div className="w-8 h-8 bg-white rounded-full"></div>
                 </div>
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">Welcome to Chat with Database</h2>
