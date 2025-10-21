@@ -139,6 +139,12 @@ const salesData = [
 
 export const seed = async () => {
 
+    console.log("Starting database seeding...");
     await db.insert(productsTable).values(productsData);
     await db.insert(salesTable).values(salesData);
+
+    console.log("Database seeded successfully!");
 };
+
+
+seed();
