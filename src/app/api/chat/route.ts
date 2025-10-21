@@ -23,7 +23,31 @@ export async function POST(req: Request) {
     messages: convertToModelMessages(messages),
     system: SYSTEM_PROMPT,
     tools: {
-      weather: tool({
+      schema: tool({
+        description: "Call this tool to get the database schema information",
+        inputSchema: z.object({}),
+        execute: async () => {
+          return `CREATE TABLE products (
+          id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+          name text NOT NULL,
+          category text NOT NULL,
+          price real NOT NULL,
+          stock integer DEFAULT 0 NOT NULL,
+          created_at text DEFAULT CURRENT_TIMESTAMP
+          );
+          CREATE TABLE sales (
+          id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+          product_id integer NOT NULL,
+          quantity integer NOT NULL,
+          total_amount real NOT NULL,
+          sale_date text DEFAULT CURRENT_TIMESTAMP,
+          customer_name text NOT NULL,
+          region text NOT NULL,
+          FOREIGN KEY (product_id) REFERENCES products (id) ON UPDATE no action ON DELETE no action
+          );`;
+        },
+      }),
+      db: tool({
         description: 'Call this tool to query the database.',
         inputSchema: z.object({
           query: z.string().describe('The SQL query to be executed on the database.'),
